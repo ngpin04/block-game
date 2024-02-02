@@ -1,10 +1,9 @@
 # My Personal Project
 
-## A subtitle
+## Quoridor 
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+This application is an implementation of the board game - ***Quoridor***. Anyone can use it to play with a bot or multiplayer. This project is interesting to me because I'm enthusiastic about strategy game. There might be some modification about the rules. 
 
-An example of text with **bold** and *italic* fonts.  
+- As a user, I want to create a new game.
+- As a user, I want to save my game.
+- As a user, I want two types of gameplay, single player and two players.
