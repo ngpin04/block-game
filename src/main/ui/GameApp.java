@@ -1,6 +1,7 @@
 package ui;
 
 import model.GameState;
+import model.Player;
 
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class GameApp {
             playTurn();
         }
 
-        game.draw();
+        draw();
         System.out.print("Player ");
         System.out.print(game.ended());
         System.out.println(" win!");
@@ -38,7 +39,7 @@ public class GameApp {
     // MODIFIES: this
     // EFFECTS: play a turn
     public void playTurn() {
-        game.draw();
+        draw();
         System.out.print("Player ");
         System.out.print(game.getPlayerTurn());
         System.out.println(" turn!");
@@ -50,10 +51,12 @@ public class GameApp {
             if (cmd.equals("1")) {
                 playMove();
             } else if (cmd.equals("2")) {
-                if (!game.currentPlayer().hasBlocks()) {
-                    System.out.println("You have no blocks!");
-                } else {
-                    playBlock();
+                if (!playBlock()) {
+                    continue;
+                }
+            } else if (cmd.equals("3")) {
+                if (!moveBlock()) {
+                    continue;
                 }
             } else {
                 continue;
@@ -66,6 +69,7 @@ public class GameApp {
     public void displayTurnChoice() {
         System.out.println("1. Move your piece");
         System.out.println("2. Place a block");
+        System.out.println("3. Randomly displace a block");
     }
 
     // EFFECTS: get the coordinate from input
@@ -95,8 +99,13 @@ public class GameApp {
         return x < HEIGHT && y < WIDTH;
     }
 
-    // EFFECTS: ask the player to place a block
-    public void playBlock() {
+    // EFFECTS: ask the player to place a block, return true
+    // if a block is placed and vice versa;
+    public Boolean playBlock() {
+        if (!game.currentPlayer().hasBlocks()) {
+            System.out.println("You have no blocks!");
+            return false;
+        }
         int row;
         int col;
         while (true) {
@@ -117,6 +126,7 @@ public class GameApp {
             game.placeBlock(row, col);
             break;
         }
+        return true;
     }
 
     // EFFECTS: ask the player to move
@@ -146,6 +156,99 @@ public class GameApp {
 
             game.move(row, col);
             break;
+        }
+    }
+
+    // EFFECTS: randomly move a chosen block, return true
+    // if a block is moved and vice versa
+    public Boolean moveBlock() {
+        if (!game.hasBlock()) {
+            System.out.println("There isn't any blocks yet!");
+            return false;
+        }
+        int row;
+        int col;
+        while (true) {
+            System.out.print("Please input your row number: ");
+            row = getCoordinate();
+            System.out.print("Please input your column number: ");
+            col = getCoordinate();
+            if (!inBoard(row, col)) {
+                System.out.println("Invalid row and column number!");
+                continue;
+            }
+
+            if (game.getBlock(row, col) == null) {
+                System.out.println("This cell isn't a block");
+                continue;
+            }
+
+            game.randomJump(row, col);
+            break;
+        }
+        return true;
+    }
+
+
+    // EFFECTS: draw the outline of the board
+    public void outline() {
+        System.out.print(" ");
+        for (int j = 0; j < WIDTH; j++) {
+            System.out.print("+==");
+        }
+        System.out.println("+");
+    }
+
+    // EFFECTS: clear console screen
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    // EFFECTS: mark the column number for the board;
+    public void numbering() {
+        for (int i = 0; i < WIDTH; i++) {
+            System.out.print("  ");
+            System.out.print(i);
+        }
+        System.out.println();
+    }
+
+    // EFFECTS: draw a row for the board
+    public void drawRow(int i) {
+        System.out.print(i);
+        for (int j = 0; j < WIDTH; j++) {
+            System.out.print("|");
+            if (!game.isBlocked(i, j)) {
+                System.out.print("  ");
+            } else {
+                Player p1 = game.getPlayer1();
+                Player p2 = game.getPlayer2();
+                if (p1.getX() == i && p1.getY() == j) {
+                    System.out.print("P1");
+                } else if (p2.getX() == i && p2.getY() == j) {
+                    System.out.print("P2");
+                } else {
+                    System.out.print("XX");
+                }
+            }
+        }
+        System.out.println("|");
+    }
+
+    // EFFECTS: draw the game state
+    public void draw() {
+        clearScreen();
+        numbering();
+
+        for (int i = 0; i <= HEIGHT; i++) {
+            outline();
+
+            if (i == HEIGHT) {
+                break;
+            }
+
+            drawRow(i);
         }
     }
 }

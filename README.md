@@ -2,8 +2,9 @@
 
 ## Quoridor 
 
-This application is an implementation of the board game - ***Quoridor***. Anyone can use it to play with a bot or multiplayer. This project is interesting to me because I'm enthusiastic about strategy game. There might be some modification about the rules. 
+This application is an implementation similar to the board game - ***Quoridor***. Anyone can use it to play with a bot or multiplayer. This project is interesting to me because I'm enthusiastic about strategy game. There are a lot of modifications about the rules. 
 
-- As a user, I want to create a new game.
-- As a user, I want to save my game.
-- As a user, I want two types of gameplay, single player and two players.
+- As one of the players, I want to add a block into my list of blocks in the game state.
+- As a user, I want to view the current game board to see the list of blocks that two players has placed .
+- As a user, I want to move my piece.
+- As a user, I want to randomly displace a block
