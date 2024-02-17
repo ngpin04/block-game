@@ -21,6 +21,7 @@ public class BlockTest {
     @Test
     void jumpingTest() {
         g.placeBlock(0, 0);
+        g.placeBlock(0, 1);
         g.placeBlock(8, 8);
         g.placeBlock(3, 4);
         Block a = g.getBlock(0, 0);
