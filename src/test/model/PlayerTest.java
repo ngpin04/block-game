@@ -31,6 +31,5 @@ class PlayerTest {
         assertEquals(p1.getX(), 2);
         assertEquals(p1.getY(), 3);
     }
-    //
 
 }
