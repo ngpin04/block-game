@@ -1,16 +1,23 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class GameState {
+// Citation: JsonSerializationDemo project
+// represent the current game state
+public class GameState implements Writable {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
-    private final Player p1;
-    private final Player p2;
+    private Player p1;
+    private Player p2;
     private final Boolean[][] blocked;
     private int currentTurn;
     private final ArrayList<Block> blockList;
 
+    // EFFECTS: create a new instance of game
     public GameState() {
         p1 = new Player(true, 10);
         p2 = new Player(false, 10);
@@ -119,5 +126,41 @@ public class GameState {
 
     public Boolean hasBlock() {
         return !blockList.isEmpty();
+    }
+
+    @Override
+    // Citation: JsonSerializationDemo project
+    // EFFECTS: return the game state as JSONObject
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("blockList", blockListToJson());
+        json.put("p1", p1.toJson());
+        json.put("p2", p2.toJson());
+        json.put("currentTurn", currentTurn);
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray blockListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Block b : blockList) {
+            jsonArray.put(b.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    public void setCurrentTurn(int currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public void setPlayers(Player p1, Player p2) {
+        blocked[this.p1.getX()][this.p1.getY()] = false;
+        blocked[this.p2.getX()][this.p2.getY()] = false;
+        this.p1 = p1;
+        this.p2 = p2;
+        blocked[this.p1.getX()][this.p1.getY()] = true;
+        blocked[this.p2.getX()][this.p2.getY()] = true;
     }
 }

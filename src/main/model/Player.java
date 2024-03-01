@@ -1,6 +1,10 @@
 package model;
 
-public class Player {
+import persistence.Writable;
+import org.json.JSONObject;
+
+// Represent a player
+public class Player implements Writable {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
 
@@ -9,6 +13,8 @@ public class Player {
     private int ypos;
     private int numBlocksLeft;
 
+    // EFFECTS: create an instance of a player with numBlocks and
+    // whether this is the first player
     public Player(Boolean isFirst, int numBlocks) {
         this.isFirst = isFirst;
         xpos = WIDTH / 2;
@@ -55,5 +61,17 @@ public class Player {
 
     public int getY() {
         return ypos;
+    }
+
+    @Override
+    // Citation: JsonSerializationDemo project
+    // EFFECTS: return the player object as JSONObject
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("isFirst", isFirst);
+        json.put("xpos", xpos);
+        json.put("ypos", ypos);
+        json.put("numBlocksLeft", numBlocksLeft);
+        return json;
     }
 }

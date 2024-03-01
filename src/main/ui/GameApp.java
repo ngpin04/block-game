@@ -2,7 +2,11 @@ package ui;
 
 import model.GameState;
 import model.Player;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static java.lang.Math.abs;
@@ -10,12 +14,17 @@ import static java.lang.Math.abs;
 public class GameApp {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
+    private static final String JSON_STORE = "./data/game.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     private Scanner input;
-    private final GameState game;
+    private GameState game;
 
     public GameApp() {
         game = new GameState();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runGame();
     }
 
@@ -249,6 +258,30 @@ public class GameApp {
             }
 
             drawRow(i);
+        }
+    }
+
+    // Citation: JsonSerializationDemo project
+    // EFFECTS: saves the game state to file
+    private void saveGameState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(game);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadGameState() {
+        try {
+            game = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

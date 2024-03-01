@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Block {
+import org.json.JSONObject;
+import persistence.Writable;
+
+// represents a block in a game state
+public class Block implements Writable {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
     private int xpos;
     private int ypos;
 
+    // EFFECTS: create an instance of a block at coordinate (x, y)
     public Block(int x, int y) {
         xpos = x;
         ypos = y;
@@ -43,5 +48,14 @@ public class Block {
         int chosenIndex = rand.nextInt(xs.size());
         xpos = xs.get(chosenIndex);
         ypos = ys.get(chosenIndex);
+    }
+
+    @Override
+    // EFFECTS: return the block object as JSONObject
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("xpos", xpos);
+        json.put("ypos", ypos);
+        return json;
     }
 }

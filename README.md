@@ -8,3 +8,5 @@ This application is an implementation similar to the board game - ***Quoridor***
 - As a user, I want to view the current game board to see the list of blocks that two players has placed .
 - As a user, I want to move my piece.
 - As a user, I want to randomly displace a block
+- As a user, I want to be able to save my game to file (if I so choose)
+- As a user, I want to be able to be able to load my game from file (if I so choose)

@@ -18,7 +18,7 @@ public class BlockTest {
         return 0 <= a.getX() && a.getX() < 9 && 0 <= a.getY() && a.getY() < 9;
    }
 
-    @Test
+@Test
     void jumpingTest() {
         g.placeBlock(0, 0);
         g.placeBlock(0, 1);
