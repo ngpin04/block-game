@@ -15,8 +15,8 @@ public class GameApp {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
     private static final String JSON_STORE = "./data/game.json";
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     private Scanner input;
     private GameState game;
