@@ -1,0 +1,37 @@
+{
+    "currentTurn": 14,
+    "p1": {
+        "isFirst": true,
+        "ypos": 5,
+        "xpos": 5,
+        "numBlocksLeft": 6
+    },
+    "p2": {
+        "isFirst": false,
+        "ypos": 3,
+        "xpos": 5,
+        "numBlocksLeft": 8
+    },
+    "blockList": [
+        {
+            "ypos": 4,
+            "xpos": 4
+        },
+        {
+            "ypos": 3,
+            "xpos": 6
+        },
+        {
+            "ypos": 4,
+            "xpos": 3
+        },
+        {
+            "ypos": 3,
+            "xpos": 3
+        },
+        {
+            "ypos": 4,
+            "xpos": 6
+        }
+    ]
+}

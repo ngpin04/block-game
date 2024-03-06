@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import static java.lang.Math.abs;
+import static java.lang.System.exit;
 
 public class GameApp {
     private static final int WIDTH = 9;
@@ -18,22 +19,40 @@ public class GameApp {
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
 
-    private Scanner input;
+    private final Scanner input;
     private GameState game;
 
     public GameApp() {
         game = new GameState();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
+        newOrLoadGame();
         runGame();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: let the user choose whether to play a new game
+    // or load the saves
+    public void newOrLoadGame() {
+        String cmd;
+        while (true) {
+            System.out.println("1. New Game");
+            System.out.println("2. Load Saved Game");
+            cmd = input.next();
+            if (cmd.equals("1")) {
+                break;
+            } else if (cmd.equals("2")) {
+                loadGameState();
+                break;
+            }
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: run the game
     public void runGame() {
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-
         while (game.ended() == 0) {
             playTurn();
         }
@@ -44,19 +63,22 @@ public class GameApp {
         System.out.println(" win!");
     }
 
+    // EFFECTS: show the user which is the current player turn
+    public void displayCurrentTurn() {
+        System.out.print("Player ");
+        System.out.print(game.getPlayerTurn());
+        System.out.println(" turn!");
+    }
 
     // MODIFIES: this
     // EFFECTS: play a turn
     public void playTurn() {
         draw();
-        System.out.print("Player ");
-        System.out.print(game.getPlayerTurn());
-        System.out.println(" turn!");
+        displayCurrentTurn();
 
-        String cmd;
         while (true) {
             displayTurnChoice();
-            cmd = input.next();
+            String cmd = input.next();
             if (cmd.equals("1")) {
                 playMove();
             } else if (cmd.equals("2")) {
@@ -67,6 +89,9 @@ public class GameApp {
                 if (!moveBlock()) {
                     continue;
                 }
+            } else if (cmd.equals("4")) {
+                saveGameState();
+                exit(0);
             } else {
                 continue;
             }
@@ -79,6 +104,7 @@ public class GameApp {
         System.out.println("1. Move your piece");
         System.out.println("2. Place a block");
         System.out.println("3. Randomly displace a block");
+        System.out.println("4. Save game and quit");
     }
 
     // EFFECTS: get the coordinate from input
