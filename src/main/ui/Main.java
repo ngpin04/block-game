@@ -2,6 +2,7 @@ package ui;
 
 public class Main {
     public static void main(String[] args) {
-        new GameApp();
+        MainMenuUI mainMenu = new MainMenuUI();
+        mainMenu.startGame();
     }
 }

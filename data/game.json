@@ -1,8 +1,8 @@
 {
-    "currentTurn": 3,
+    "currentTurn": 2,
     "p1": {
         "isFirst": true,
-        "ypos": 7,
+        "ypos": 8,
         "xpos": 4,
         "numBlocksLeft": 9
     },
@@ -10,10 +10,10 @@
         "isFirst": false,
         "ypos": 0,
         "xpos": 4,
-        "numBlocksLeft": 9
+        "numBlocksLeft": 10
     },
     "blockList": [{
-        "ypos": 6,
+        "ypos": 2,
         "xpos": 4
     }]
 }
