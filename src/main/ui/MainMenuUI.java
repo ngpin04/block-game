@@ -11,7 +11,10 @@ public class MainMenuUI extends JPanel
                         implements ActionListener {
     protected JButton newGameButton;
     protected JButton loadGameButton;
+    private GameAppUI gameAppUI;
 
+    // MODIFIES: this
+    // EFFECTS: start main menu UI
     public MainMenuUI() {
         newGameButton = new JButton("New Game");
         newGameButton.setVerticalTextPosition(AbstractButton.CENTER);
@@ -36,13 +39,16 @@ public class MainMenuUI extends JPanel
         add(loadGameButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: load game and change to the game GUI
     public void actionPerformed(ActionEvent e) {
+        loadGameButton.setEnabled(false);
+        newGameButton.setEnabled(false);
+
         if ("new game".equals(e.getActionCommand())) {
-            loadGameButton.setEnabled(true);
-            newGameButton.setEnabled(false);
+            gameAppUI = new GameAppUI(true);
         } else {
-            loadGameButton.setEnabled(false);
-            newGameButton.setEnabled(true);
+            gameAppUI = new GameAppUI(false);
         }
     }
 
@@ -51,6 +57,7 @@ public class MainMenuUI extends JPanel
      * this method should be invoked from the
      * event-dispatching thread.
      */
+    // Citation: from Button Demo
     private static void createAndShowGUI() {
 
         //Create and set up the window.
@@ -67,6 +74,8 @@ public class MainMenuUI extends JPanel
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: run game
     public void startGame() {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
