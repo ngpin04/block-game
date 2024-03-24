@@ -5,50 +5,58 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
+// Represent the Game Frame
 public class GameAppUI extends JFrame {
-    private static final int WIDTH = 9;
-    private static final int HEIGHT = 9;
     private static final String JSON_STORE = "./data/game.json";
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
 
     private GameState game;
-    private GamePanel gp;
 
+    // EFFECTS: open a new game frame
     public GameAppUI(Boolean newGame) {
         super("Undecided game name");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
 
         game = new GameState();
-        gp = new GamePanel(game);
-        add(gp);
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         if (!newGame) {
             loadGameState();
         }
+
+        TurnPanel tp = new TurnPanel(game);
+        GamePanel gp = new GamePanel(game, tp);
+        SavePanel sp = new SavePanel(this);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(gp);
+        mainPanel.add(sp);
+        mainPanel.add(tp);
+        add(mainPanel);
+
+        pack();
+        centreOnScreen();
+        setVisible(true);
     }
 
-    private class MouseHandler extends MouseAdapter {
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            int x = e.getX();
-            int y = e.getY();
-        }
+    // Centres frame on desktop
+    // modifies: this
+    // effects:  location of frame is set so frame is centred on desktop
+    private void centreOnScreen() {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
     }
 
     // Citation: JsonSerializationDemo project
     // EFFECTS: saves the game state to file
-    private void saveGameState() {
+    public void saveGameState() {
         try {
             jsonWriter.open();
             jsonWriter.write(game);
@@ -61,7 +69,7 @@ public class GameAppUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
-    private void loadGameState() {
+    public void loadGameState() {
         try {
             game = jsonReader.read();
             System.out.println("Loaded from " + JSON_STORE);

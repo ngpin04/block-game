@@ -44,6 +44,8 @@ public class Block implements Writable {
             }
         }
 
+        xs.add(xpos);
+        ys.add(ypos);
         Random rand = new Random();
         int chosenIndex = rand.nextInt(xs.size());
         xpos = xs.get(chosenIndex);

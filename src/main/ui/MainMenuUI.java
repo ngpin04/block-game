@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,7 +12,6 @@ public class MainMenuUI extends JPanel
                         implements ActionListener {
     protected JButton newGameButton;
     protected JButton loadGameButton;
-    private GameAppUI gameAppUI;
 
     // MODIFIES: this
     // EFFECTS: start main menu UI
@@ -46,9 +46,9 @@ public class MainMenuUI extends JPanel
         newGameButton.setEnabled(false);
 
         if ("new game".equals(e.getActionCommand())) {
-            gameAppUI = new GameAppUI(true);
+            new GameAppUI(true);
         } else {
-            gameAppUI = new GameAppUI(false);
+            new GameAppUI(false);
         }
     }
 
@@ -58,7 +58,7 @@ public class MainMenuUI extends JPanel
      * event-dispatching thread.
      */
     // Citation: from Button Demo
-    private static void createAndShowGUI() {
+    private void createAndShowGUI() {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Main Menu");
@@ -68,6 +68,9 @@ public class MainMenuUI extends JPanel
         MainMenuUI newContentPane = new MainMenuUI();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
+
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
 
         //Display the window.
         frame.pack();
