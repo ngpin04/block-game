@@ -65,7 +65,7 @@ public class GamePanel extends JPanel {
                         if (prevX == -1) {
                             prevX = i;
                             prevY = j;
-                        } else if (!moveGame(prevX, prevY, i, j)) {
+                        } else if (game.ended() == 0 && !moveGame(prevX, prevY, i, j)) {
                             prevX = i;
                             prevY = j;
                         } else {

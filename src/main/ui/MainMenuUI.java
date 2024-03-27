@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 
+// represent main menu UI
 public class MainMenuUI extends JPanel
                         implements ActionListener {
     protected JButton newGameButton;
@@ -58,6 +59,8 @@ public class MainMenuUI extends JPanel
      * event-dispatching thread.
      */
     // Citation: from Button Demo
+    // MODIFIES: this
+    // EFFECTS: Create the GUI and show it.
     private void createAndShowGUI() {
 
         //Create and set up the window.

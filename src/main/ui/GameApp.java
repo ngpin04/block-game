@@ -12,6 +12,7 @@ import java.util.Scanner;
 import static java.lang.Math.abs;
 import static java.lang.System.exit;
 
+// Represent the terminal Game App
 public class GameApp {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
