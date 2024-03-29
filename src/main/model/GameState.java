@@ -122,6 +122,7 @@ public class GameState implements Writable {
         Block b = getBlock(x, y);
         b.jump(this);
         blocked[b.getX()][b.getY()] = true;
+        currentTurn += 1;
     }
 
     public Boolean hasBlock() {
