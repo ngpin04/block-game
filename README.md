@@ -19,3 +19,4 @@ This application is an implementation similar to the board game - ***Quoridor***
 - While in turn, you can randomly displace (there is a chance it would stay at the same place) a box by double clicking a square with a block
 - While in turn, you can move a player by clicking the box where the player in turn is in and then click another adjacent box that is not blocked.
 - You can always see the game board while the game window is open
+- When the game ends, there will be an image of a cup pop up.

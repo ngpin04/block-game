@@ -2,8 +2,11 @@ package ui;
 
 import model.GameState;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 // Reflect the player turn or if the game has finished
 public class TurnPanel extends JPanel {
@@ -34,6 +37,14 @@ public class TurnPanel extends JPanel {
             turn.setText(TURN + game.getPlayerTurn());
         } else {
             turn.setText(END + game.ended());
+            try {
+                BufferedImage myPicture = ImageIO.read(new File("images/cup.png"));
+                JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+                picLabel.setSize(10, 10);
+                add(picLabel);
+            } catch (Exception e) {
+                // ...
+            }
         }
         repaint();
     }
