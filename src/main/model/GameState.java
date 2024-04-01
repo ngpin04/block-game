@@ -31,6 +31,7 @@ public class GameState implements Writable {
         blocked[p1.getX()][p1.getY()] = true;
         blocked[p2.getX()][p2.getY()] = true;
         blockList = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("new game state created"));
     }
 
     // REQUIRES: (x, y) lies in the board and
@@ -46,6 +47,7 @@ public class GameState implements Writable {
         }
         currentTurn += 1;
         blockList.add(new Block(x, y));
+        EventLog.getInstance().logEvent(new Event("Added block at (" + x + ", " + y + ")"));
     }
 
     public Boolean isBlocked(int x, int y) {
@@ -72,6 +74,8 @@ public class GameState implements Writable {
         blocked[p.getX()][p.getY()] = false;
         p.move(x, y);
         currentTurn += 1;
+        EventLog.getInstance().logEvent(new Event("Player " + getPlayerTurn() + " move to ("
+                + x + ", " + y + ")"));
     }
 
     // EFFECTS: return 0 the game is not ended, otherwise
@@ -123,6 +127,8 @@ public class GameState implements Writable {
         b.jump(this);
         blocked[b.getX()][b.getY()] = true;
         currentTurn += 1;
+        EventLog.getInstance().logEvent(new Event("Block at (" + x + ", " + y + ") is moved to ("
+                + b.getX() + ", " + b.getY() + ")"));
     }
 
     public Boolean hasBlock() {

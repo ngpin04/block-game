@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit tests for GameState
 public class GameStateTest {
     GameState g;
 

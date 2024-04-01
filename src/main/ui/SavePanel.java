@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import static java.lang.System.exit;
 
@@ -36,6 +37,8 @@ public class SavePanel extends JPanel implements ActionListener {
         if ("Save game".equals(e.getActionCommand())) {
             gui.saveGameState();
         }
+
+        gui.dispatchEvent(new WindowEvent(gui, WindowEvent.WINDOW_CLOSING));
         exit(0);
     }
 }

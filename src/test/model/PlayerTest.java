@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit tests for Player
 class PlayerTest {
 //    private final int WIDTH = 9;
     private static final int HEIGHT = 9;

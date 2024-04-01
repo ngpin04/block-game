@@ -1,16 +1,24 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.GameState;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // Represent the Game Frame
-public class GameAppUI extends JFrame {
+public class GameAppUI extends JFrame implements WindowListener,
+        WindowFocusListener,
+        WindowStateListener {
     private static final String JSON_STORE = "./data/game.json";
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
@@ -22,6 +30,8 @@ public class GameAppUI extends JFrame {
         super("Undecided game name");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(false);
+        addWindowListener(this);
+        addWindowStateListener(this);
 
         game = new GameState();
 
@@ -76,5 +86,57 @@ public class GameAppUI extends JFrame {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+    }
+
+    @Override
+    public void windowGainedFocus(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowLostFocus(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event.toString());
+        }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowStateChanged(WindowEvent e) {
+
     }
 }
