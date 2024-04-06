@@ -31,7 +31,6 @@ public class GameState implements Writable {
         blocked[p1.getX()][p1.getY()] = true;
         blocked[p2.getX()][p2.getY()] = true;
         blockList = new ArrayList<>();
-        EventLog.getInstance().logEvent(new Event("new game state created"));
     }
 
     // REQUIRES: (x, y) lies in the board and

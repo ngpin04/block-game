@@ -20,3 +20,32 @@ This application is an implementation similar to the board game - ***Quoridor***
 - While in turn, you can move a player by clicking the box where the player in turn is in and then click another adjacent box that is not blocked.
 - You can always see the game board while the game window is open
 - When the game ends, there will be an image of a cup pop up.
+# Phase 4: Task 2
+Sat Apr 06 11:33:04 PDT 2024
+Added block at (3, 3)
+Sat Apr 06 11:33:05 PDT 2024
+Added block at (3, 4)
+Sat Apr 06 11:33:05 PDT 2024
+Player 2 move to (4, 7)
+Sat Apr 06 11:33:07 PDT 2024
+Player 1 move to (5, 0)
+Sat Apr 06 11:33:07 PDT 2024
+Block at (3, 3) is moved to (2, 3)
+Sat Apr 06 11:33:08 PDT 2024
+Block at (3, 4) is moved to (3, 5)
+Sat Apr 06 11:33:09 PDT 2024
+Block at (2, 3) is moved to (2, 4)
+Sat Apr 06 11:33:10 PDT 2024
+Added block at (3, 4)
+Sat Apr 06 11:33:11 PDT 2024
+Added block at (3, 1)
+Sat Apr 06 11:33:12 PDT 2024
+Added block at (4, 2)
+Sat Apr 06 11:33:14 PDT 2024
+Player 2 move to (4, 6)
+Sat Apr 06 11:33:15 PDT 2024
+Player 1 move to (5, 1)
+Sat Apr 06 11:33:17 PDT 2024
+Player 2 move to (5, 6)
+Sat Apr 06 11:33:17 PDT 2024
+Player 1 move to (5, 2)

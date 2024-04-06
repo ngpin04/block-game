@@ -28,7 +28,7 @@ public class EventTest {
     @Test
     public void testEvent() {
         assertEquals("Added block at (2, 3)", e.getDescription());
-//        assertEquals(d, e.getDate());
+        assertEquals(d, e.getDate());
     }
 
     @Test
