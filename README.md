@@ -15,8 +15,8 @@ This application is an implementation similar to the board game - ***Quoridor***
 - When the application is open, you are asked by a pop-up window with two buttons "load game" and "new game", you can choose to load game by clicking "load game".
 - In the game windows, you can save the game and quit by clicking the button "save and quit" near the bottom of the window
 - In the game windows, you can quit without saving by clicking the button "quit" near the bottom of the window
-- While in turn, you can add a box into the game by double clicking an empty square
-- While in turn, you can randomly displace (there is a chance it would stay at the same place) a box by double clicking a square with a block
+- While in turn, you can add a box into the game by double-clicking an empty square
+- While in turn, you can randomly displace (there is a chance it would stay at the same place) a box by double-clicking a square with a block
 - While in turn, you can move a player by clicking the box where the player in turn is in and then click another adjacent box that is not blocked.
 - You can always see the game board while the game window is open
 - When the game ends, there will be an image of a cup pop up.
@@ -49,3 +49,7 @@ Sat Apr 06 11:33:17 PDT 2024
 Player 2 move to (5, 6)
 Sat Apr 06 11:33:17 PDT 2024
 Player 1 move to (5, 2)
+# Phase 4: Task 3
+- Merge GamePanel and TurnPanel to reduce coupling and increase cohesion.
+- I may also merge all panels together to reduce coupling, but it would decrease cohesion.
+- It may be better to make SavePanel responsible for saving the game, but then it has to store an instance of GameState which increase coupling but increase cohesion.
